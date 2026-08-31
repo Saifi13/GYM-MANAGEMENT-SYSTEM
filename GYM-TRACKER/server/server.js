@@ -1,7 +1,7 @@
 import express from "express";
 import cors from "cors";
 import dotenv from "dotenv";
-import db from "../db.js";
+import db from "./db.js";  // ✅ Correct! Same folder
 
 dotenv.config();
 
@@ -19,6 +19,11 @@ app.use((req, res, next) => {
 
 app.use(cors());
 app.use(express.json());
+
+// Add this root route
+app.get("/", (req, res) => {
+  res.json({ message: "Gym Management System API is running! 🏋️" });
+});
 
 app.get("/members", async (req, res) => {
     try{
