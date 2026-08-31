@@ -5,9 +5,16 @@ import db from "./db.js";
 const app = express();
 const PORT = 3000;
 
+app.use((req, res, next) => {
+  res.setHeader(
+    "Content-Security-Policy",
+    "default-src 'self'; style-src 'self' 'unsafe-inline'; script-src 'self' 'unsafe-inline'"
+  );
+  next();
+});
+
 app.use(cors());
 app.use(express.json());
-
 
 app.get("/members", async (req, res) => {
     try{
@@ -23,6 +30,19 @@ const result = await db.query("SELECT * FROM members");
 app.post("/members", async (req, res) => {
   try {
     const { name, phone, membership, joining, end_date , price} = req.body;
+
+    // Validation
+    if (!name || !phone || !membership || !price) {
+      return res.status(400).json({ error: "Missing required fields" });
+    }
+
+    if (typeof price !== 'number' || price <= 0) {
+      return res.status(400).json({ error: "Price must be a positive number" });
+    }
+
+    if (!/^\d{10}$/.test(phone)) {
+      return res.status(400).json({ error: "Phone must be 10 digits" });
+    }
 
     const result = await db.query(
       `INSERT INTO members
