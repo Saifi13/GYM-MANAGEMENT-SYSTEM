@@ -40,7 +40,7 @@ useEffect(() => {
 }, []);
 
 function handleMemberAdded(newMember) {
-  setMembers((currentMember) => [...currentMember, newMember]);
+  setMembers((currentMember) => [newMember, ...currentMember]);
   setShowAddMember(false);
 }
 
