@@ -28,7 +28,7 @@ async function handleClick(event){
 event.preventDefault();
 console.log(formData)
 
- const response = await fetch("http://localhost:3000/members", {
+ const response = await fetch("https://gym-management-system-production-2248.up.railway.app/members", {
       method: 'POST',
       headers: {
           "Content-Type": "application/json",

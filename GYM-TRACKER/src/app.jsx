@@ -3,6 +3,7 @@ import StatsCard from "./StatsCard";
 import MemberCard from "./MemberCard";
 import {useState, useEffect} from "react"
 import AddMember from "./AddMember.jsx";
+import React from "react";
 
 function App() {
 
@@ -33,7 +34,7 @@ const filteredMembers = members.filter((member) => {
 });
 
 useEffect(() => {
-  fetch("http://localhost:3000/members")
+  fetch("https://gym-management-system-production-2248.up.railway.app/members")
     .then((response) => response.json())
     .then((data) => setMembers(data))
     .catch((error) => console.error(error));
@@ -45,7 +46,7 @@ function handleMemberAdded(newMember) {
 }
 
 function deleteMember(id) {
-  fetch(`http://localhost:3000/members/${id}`, {
+  fetch(`https://gym-management-system-production-2248.up.railway.app/members/${id}`, {
     method: "DELETE",
   })
     .then(() => {
@@ -57,7 +58,7 @@ function deleteMember(id) {
 }
 
 function RenewMember(id, newEndDate) {
-  fetch(`http://localhost:3000/members/${id}`, {
+  fetch(`https://gym-management-system-production-2248.up.railway.app/members/${id}`, {
     method: "PUT",
     headers: {
       "Content-Type": "application/json",
