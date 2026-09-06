@@ -1,7 +1,9 @@
 import React, { useState } from "react";
 import "./style.css";
 
-const API_URL = import.meta.env.VITE_API_URL;
+const API_URL =
+  import.meta.env.VITE_API_URL ||
+  "https://gym-management-system-production-2248.up.railway.app";
 
 function MemberCard(props){
 
@@ -23,9 +25,7 @@ async function handleRenew() {
     headers: {
       "Content-Type": "application/json",
     },
-    body: JSON.stringify({
-      end_date: new_endDate,
-    }),
+    body: JSON.stringify({ end_date: new_endDate }),
   });
 
   if (!response.ok) {
