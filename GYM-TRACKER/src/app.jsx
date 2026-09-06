@@ -36,7 +36,10 @@ const filteredMembers = members.filter((member) => {
 useEffect(() => {
   async function loadMembers() {
     try {
-      const API_URL = import.meta.env.VITE_API_URL;
+      const API_URL =
+        import.meta.env.VITE_API_URL ||
+        "https://gym-management-system-production-2248.up.railway.app";
+
       const response = await fetch(`${API_URL}/members`);
       const data = await response.json();
 
