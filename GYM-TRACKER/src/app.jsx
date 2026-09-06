@@ -34,16 +34,24 @@ const filteredMembers = members.filter((member) => {
 });
 
 useEffect(() => {
-  const API_URL = import.meta.env.VITE_API_URL;
+  async function loadMembers() {
+    try {
+      const API_URL = import.meta.env.VITE_API_URL;
+      const response = await fetch(`${API_URL}/members`);
+      const data = await response.json();
 
-  const response = await fetch(`${API_URL}/members`);
-  const data = await response.json();
+      if (!response.ok) {
+        throw new Error(data.error || "Failed to load members");
+      }
 
-  if (!response.ok) {
-    throw new Error(data.error || "Failed to load members");
+      setMembers(Array.isArray(data) ? data : []);
+    } catch (error) {
+      console.error("Failed to load members:", error);
+      setMembers([]);
+    }
   }
 
-  setMembers(Array.isArray(data) ? data : []);
+  loadMembers();
 }, []);
 
 function handleMemberAdded(newMember) {
