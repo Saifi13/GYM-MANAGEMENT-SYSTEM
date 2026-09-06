@@ -1,7 +1,7 @@
-import React from "react";
+import React, { useState } from "react";
 import "./style.css";
-import { useState } from "react";
 
+const API_URL = import.meta.env.VITE_API_URL;
 
 function MemberCard(props){
 
@@ -10,42 +10,32 @@ function MemberCard(props){
 
 
 async function handleDelete() {
-    await fetch(`http://localhost:3000/members/${props.id}` , {
-        method:"delete"
-    })
-    props.onDelete(props.id)
+  await fetch(`${API_URL}/members/${props.id}`, {
+    method: "DELETE",
+  });
+
+  props.onDelete(props.id);
 }
 
 async function handleRenew() {
-  const url = `http://localhost:3000/members/${props.id}`;
-  
-  const payload = {
-   end_date: new_endDate
-  };
+  const response = await fetch(`${API_URL}/members/${props.id}`, {
+    method: "PUT",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      end_date: new_endDate,
+    }),
+  });
 
-  try {
-    const response = await fetch(url, {
-      method: 'PUT',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(payload)
-    });
-
-    // Fetch only rejects on network failure; manually check HTTP status
-    if (!response.ok) {
-      throw new Error(`HTTP error! Status: ${response.status}`);
-    }
-
-    props.onRenew(props.id, new_endDate);
-    setIsClicked(false);
-    setNew_endDate("");
-  } catch (error) {
-    console.error("Error:", error);
+  if (!response.ok) {
+    throw new Error(`Renewal failed: ${response.status}`);
   }
 
+  props.onRenew(props.id, new_endDate);
+  setIsClicked(false);
+  setNew_endDate("");
 }
-
 
   function getStatus(end_date) {
     const today = new Date().toISOString().split("T")[0];

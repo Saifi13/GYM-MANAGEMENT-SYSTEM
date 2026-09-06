@@ -34,10 +34,16 @@ const filteredMembers = members.filter((member) => {
 });
 
 useEffect(() => {
-  fetch("https://gym-management-system-production-2248.up.railway.app/members")
-    .then((response) => response.json())
-    .then((data) => setMembers(data))
-    .catch((error) => console.error(error));
+  const API_URL = import.meta.env.VITE_API_URL;
+
+  const response = await fetch(`${API_URL}/members`);
+  const data = await response.json();
+
+  if (!response.ok) {
+    throw new Error(data.error || "Failed to load members");
+  }
+
+  setMembers(Array.isArray(data) ? data : []);
 }, []);
 
 function handleMemberAdded(newMember) {
