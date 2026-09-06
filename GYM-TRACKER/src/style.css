@@ -440,3 +440,71 @@ h3 {
     flex: 1 1 auto;
   }
 }
+
+@media (max-width: 600px) {
+  .content-area {
+    padding: 12px;
+  }
+
+  .toolbar {
+    gap: 8px;
+    flex-wrap: wrap;
+  }
+
+  .search-box,
+  .filter-box {
+    width: 100%;
+  }
+
+  .search-box input,
+  .filter-box select,
+  .add-member-btn {
+    width: 100%;
+    min-height: 38px;
+    font-size: 14px;
+  }
+
+  .members-container {
+    padding: 12px;
+  }
+
+  .members-container h1 {
+    font-size: 20px;
+    margin: 8px 0 12px;
+  }
+
+  .member-card {
+    padding: 12px;
+    margin-bottom: 10px;
+    font-size: 14px;
+  }
+
+  .member-card h3 {
+    font-size: 17px;
+    margin: 0 0 6px;
+  }
+
+  .member-card p {
+    margin: 5px 0;
+  }
+
+  .renew-button,
+  .save-button,
+  .delete-button {
+    padding: 8px 10px;
+    font-size: 13px;
+  }
+
+  .member-card input[type="date"] {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 8px;
+    margin: 8px 0;
+    font-size: 14px;
+  }
+
+  .stats-card {
+    padding: 12px;
+    min-height: auto;
+  }
+}
