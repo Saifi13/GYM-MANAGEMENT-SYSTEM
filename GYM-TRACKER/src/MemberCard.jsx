@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import "./style.css";
 
+const configuredApiUrl = import.meta.env.VITE_API_URL;
+
 const API_URL =
   import.meta.env.VITE_API_URL ||
   "https://gym-management-system-production-2248.up.railway.app";
@@ -20,6 +22,8 @@ async function handleDelete() {
 }
 
 async function handleRenew() {
+  if (!new_endDate) return;
+
   const response = await fetch(`${API_URL}/members/${props.id}`, {
     method: "PUT",
     headers: {
