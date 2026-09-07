@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Trash2 } from "lucide-react";
 import "./style.css";
 
 
@@ -70,7 +71,9 @@ function formatDate(date) {
         <button className="renew-button" onClick={() => setIsClicked(true)}>Renew</button>
       )}
 
-      <button className="delete-button" onClick={handleDelete}>Delete</button>
+      <button className="delete-button" onClick={handleDelete}>
+        <Trash2 className="delete-icon" />
+      </button>
 
     </div>
 }

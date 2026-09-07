@@ -13,7 +13,9 @@ function App() {
 const [members, setMembers] = useState([]);
 const [search, setSearch] = useState("");
 const [filter, setFilter] = useState("");
+const [membershipFilter, setMembershipFilter] = useState("");
 const [showAddMember, setShowAddMember] = useState(false);
+const [visibleCount, setVisibleCount] = useState(12);
 
   const todayy = new Date().toISOString().split("T")[0];
 
@@ -30,7 +32,9 @@ const filteredMembers = members.filter((member) => {
   const statusValue = isMembersActive(member) ? "activate" : "deactivate";
   const matchFilter = !filter || statusValue === filter;
 
-  return matchSearch && matchFilter;
+  const matchMembership = !membershipFilter || member.membership === membershipFilter;
+
+  return matchSearch && matchFilter && matchMembership;
 });
 
 useEffect(() => {
@@ -139,9 +143,21 @@ return (
             value={filter}
             onChange={(event) => setFilter(event.target.value)}
           >
-            <option value="">All Members</option>
+            <option value="">All Status</option>
             <option value="activate">Active</option>
             <option value="deactivate">Deactivate</option>
+          </select>
+        </div>
+
+        <div className="filter-box">
+          <select
+            value={membershipFilter}
+            onChange={(event) => setMembershipFilter(event.target.value)}
+          >
+            <option value="">All Types</option>
+            <option value="Monthly">Monthly</option>
+            <option value="Quarterly">Quarterly</option>
+            <option value="Yearly">Yearly</option>
           </select>
         </div>
 
@@ -162,14 +178,36 @@ return (
             <p>No members found</p>
           </div>
         ) : (
-          filteredMembers.map((member) => (
-            <MemberCard
-              key={member.id}
-              {...member}
-              onDelete={deleteMember}
-              onRenew={RenewMember}
-            />
-          ))
+          <>
+            {filteredMembers.slice(0, visibleCount).map((member) => (
+              <MemberCard
+                key={member.id}
+                {...member}
+                onDelete={deleteMember}
+                onRenew={RenewMember}
+              />
+            ))}
+
+            {filteredMembers.length > 12 && (
+              <div className="pagination-buttons">
+                {visibleCount < filteredMembers.length ? (
+                  <button
+                    className="show-more-btn"
+                    onClick={() => setVisibleCount(prev => prev + 12)}
+                  >
+                    Show More ({filteredMembers.length - visibleCount} remaining)
+                  </button>
+                ) : (
+                  <button
+                    className="show-less-btn"
+                    onClick={() => setVisibleCount(12)}
+                  >
+                    Show Less
+                  </button>
+                )}
+              </div>
+            )}
+          </>
         )}
       </div>
     </div>
