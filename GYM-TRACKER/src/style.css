@@ -1,18 +1,18 @@
 :root {
-  --bg: #0d0d0d;
-  --bg-2: #1a1a1a;
-  --page: #0d0d0d;
-  --panel: #1a1a1a;
-  --panel-2: #2d2d2d;
-  --panel-3: #404040;
-  --primary: #4a5568;
-  --primary-dark: #2d3748;
-  --primary-soft: #718096;
-  --accent: #ed8936;
-  --accent-soft: #f6ad55;
-  --text: #f7fafc;
-  --muted: #a0aec0;
-  --line: rgba(255, 255, 255, 0.08);
+  --bg: #0A0E0F;
+  --bg-2: #0A0E0F;
+  --page: #0A0E0F;
+  --panel: #0A0E0F;
+  --panel-2: #1a1a1a;
+  --panel-3: #2a2a2a;
+  --primary: #C1EB1B;
+  --primary-dark: #9bc415;
+  --primary-soft: #d4f04e;
+  --accent: #C1EB1B;
+  --accent-soft: #d4f04e;
+  --text: #ffffff;
+  --muted: #b0b0b0;
+  --line: rgba(255, 255, 255, 0.1);
   --shadow-dark: 0 20px 40px rgba(0, 0, 0, 0.6);
   --shadow-soft: 0 8px 20px rgba(0, 0, 0, 0.4);
   --card-shadow: 0 12px 32px rgba(0, 0, 0, 0.5);
@@ -26,8 +26,6 @@ body {
   margin: 0;
   min-width: 320px;
   background:
-    radial-gradient(circle at top left, rgba(74, 85, 104, 0.12), transparent 30%),
-    radial-gradient(circle at bottom right, rgba(237, 137, 54, 0.06), transparent 28%),
     linear-gradient(180deg, var(--bg) 0%, var(--bg-2) 100%);
   color: var(--text);
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
@@ -46,11 +44,11 @@ h3 {
   padding: 32px 22px 26px;
   text-align: center;
   background:
-    linear-gradient(135deg, rgba(74, 85, 104, 0.95), rgba(45, 55, 72, 0.98)),
-    linear-gradient(120deg, #4a5568, #2d3748);
-  border: 2px solid rgba(237, 137, 54, 0.25);
+    linear-gradient(135deg, rgba(193, 235, 27, 0.95), rgba(155, 196, 21, 0.98)),
+    linear-gradient(120deg, #C1EB1B, #9bc415);
+  border: 2px solid rgba(255, 255, 255, 0.3);
   border-radius: 18px;
-  box-shadow: var(--card-shadow), inset 0 0 0 1px rgba(237, 137, 54, 0.08);
+  box-shadow: var(--card-shadow), inset 0 0 0 1px rgba(255, 255, 255, 0.1);
   position: relative;
   overflow: hidden;
 }
@@ -80,7 +78,7 @@ h3 {
 
 .dashboard h2 {
   margin: 10px 0 0;
-  color: var(--accent-soft);
+  color: #0A0E0F;
   font-size: clamp(0.8rem, 1.5vw, 1.2rem);
   letter-spacing: 1.5px;
   position: relative;
@@ -104,19 +102,19 @@ h3 {
 
 .stats-card:hover {
   transform: translateY(-4px);
-  border-color: var(--accent);
+  border-color: var(--primary);
 }
 
 .stats-card h3 {
   margin: 0 0 12px;
-  color: var(--accent);
+  color: var(--primary);
   font-size: 1.08rem;
   letter-spacing: 1.2px;
 }
 
 .stats-card p {
   margin: 0;
-  color: var(--primary-soft);
+  color: #ffffff;
   font-size: clamp(1.5rem, 2.4vw, 2.2rem);
   font-weight: 900;
 }
@@ -131,7 +129,7 @@ h3 {
 .members-container > h1 {
   grid-column: 1 / -1;
   margin: 0 0 4px;
-  color: var(--accent);
+  color: var(--primary);
   font-size: clamp(2rem, 4vw, 3rem);
   border-bottom: 3px solid var(--line);
   padding-bottom: 10px;
@@ -142,7 +140,7 @@ h3 {
   min-height: 300px;
   padding: 22px 20px 18px;
   background:
-    linear-gradient(140deg, rgba(26, 26, 26, 1), rgba(10, 10, 10, 1));
+    linear-gradient(140deg, rgba(10, 14, 15, 1), rgba(10, 14, 15, 1));
   border: 2px solid var(--line);
   border-top: 8px solid var(--primary);
   border-radius: 16px;
@@ -152,7 +150,7 @@ h3 {
 
 .member-card:hover {
   transform: translateY(-5px);
-  border-color: var(--accent);
+  border-color: var(--primary);
 }
 
 .member-card h3 {
@@ -183,8 +181,8 @@ h3 {
 }
 
 .member-card input:focus {
-  border-color: var(--accent);
-  box-shadow: 0 0 0 3px rgba(255, 204, 0, 0.12);
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px rgba(193, 235, 27, 0.15);
 }
 
 .member-card button {
@@ -206,15 +204,18 @@ h3 {
 
 .renew-button,
 .save-button {
-  background: linear-gradient(135deg, var(--accent), #dd6b20);
+  background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+  color: #0A0E0F !important;
 }
 
 .delete-button {
-  background: linear-gradient(135deg, #718096, #4a5568);
+  background: linear-gradient(135deg, #2d2d2d, #1a1a1a);
 }
 
 .delete-icon {
   color: white;
+  width: 16px;
+  height: 16px;
 }
 
 .form {
@@ -229,7 +230,7 @@ h3 {
 
 .form h2 {
   margin-top: 0;
-  color: var(--accent);
+  color: var(--primary);
   text-align: center;
   font-size: 2.5rem;
 }
@@ -237,7 +238,7 @@ h3 {
 .form label {
   display: block;
   margin: 14px 0 8px;
-  color: var(--primary-soft);
+  color: var(--primary);
   font-weight: 700;
 }
 
@@ -253,8 +254,8 @@ h3 {
 }
 
 .form input:focus {
-  border-color: var(--accent);
-  box-shadow: 0 0 0 3px rgba(255, 204, 0, 0.12);
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px rgba(193, 235, 27, 0.15);
 }
 
 .form input[type="date"] {
@@ -275,7 +276,7 @@ h3 {
   width: 100%;
   margin-top: 24px;
   padding: 14px;
-  color: #fff;
+  color: #0A0E0F;
   background: linear-gradient(135deg, var(--primary), var(--primary-dark));
   border: 0;
   border-radius: 8px;
@@ -354,12 +355,12 @@ h3 {
   min-height: 62px;
   border: none;
   border-radius: 14px;
-  background: linear-gradient(135deg, var(--accent), #dd6b20);
-  color: #000;
+  background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+  color: #0A0E0F;
   font-weight: 700;
   font-size: 0.96rem;
   cursor: pointer;
-  box-shadow: 0 8px 18px rgba(237, 137, 54, 0.25);
+  box-shadow: 0 8px 18px rgba(193, 235, 27, 0.3);
   transition: transform 0.2s ease, filter 0.2s ease;
 }
 
@@ -501,14 +502,14 @@ h3 {
 .show-less-btn {
   padding: 14px 32px;
   background: linear-gradient(135deg, var(--primary), var(--primary-dark));
-  color: white;
+  color: #0A0E0F;
   border: none;
   border-radius: 12px;
   font-weight: 700;
   font-size: 1rem;
   cursor: pointer;
   transition: transform 0.2s ease, filter 0.2s ease;
-  box-shadow: 0 8px 20px rgba(74, 85, 104, 0.3);
+  box-shadow: 0 8px 20px rgba(193, 235, 27, 0.3);
 }
 
 .show-more-btn:hover,
@@ -518,9 +519,9 @@ h3 {
 }
 
 .show-less-btn {
-  background: linear-gradient(135deg, var(--accent), #dd6b20);
-  color: #000;
-  box-shadow: 0 8px 20px rgba(237, 137, 54, 0.3);
+  background: linear-gradient(135deg, #2d2d2d, #1a1a1a);
+  color: #ffffff;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
 }
 
 @media (max-width: 768px) {
@@ -660,5 +661,20 @@ h3 {
     font-size: 1.15rem;
     line-height: 1.2;
     overflow-wrap: anywhere;
+  }
+
+  .member-card .delete-button {
+    width: 38px;
+    height: 38px;
+    margin: 10px 0 0;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .member-card .delete-icon {
+    width: 15px;
+    height: 15px;
   }
 }
