@@ -143,9 +143,9 @@ return (
             value={filter}
             onChange={(event) => setFilter(event.target.value)}
           >
-            <option value="">All Status</option>
+            <option value="">All Members</option>
             <option value="activate">Active</option>
-            <option value="deactivate">Deactivate</option>
+            <option value="deactivate">Expired</option>
           </select>
         </div>
 
