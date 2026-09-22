@@ -40,8 +40,8 @@ h3 {
 }
 
 .dashboard {
-  margin: 24px 1.5% 28px;
-  padding: 32px 22px 26px;
+  margin: 18px 1.5% 22px;
+  padding: 24px 18px 20px;
   text-align: center;
   background:
     linear-gradient(135deg, rgba(163, 230, 53, 0.95), rgba(155, 196, 21, 0.98)),
@@ -87,11 +87,22 @@ font-weight: 1000;
 }
 
 .stats-card {
+<<<<<<< HEAD
   display: inline-block;
   width: 21%;
   min-height: 140px;
   margin: 0 1.5% 16px;
   padding: 24px 20px 20px;
+=======
+  display: inline-flex;
+  vertical-align: top;
+  flex-direction: column;
+  justify-content: center;
+  width: calc(50% - 3.2%);
+  min-height: 115px;
+  margin: 0 1.5% 16px;
+  padding: 18px 14px;
+>>>>>>> 0d5ffa6 (Improve responsive member dashboard styling)
   text-align: center;
   background:
     linear-gradient(180deg, rgba(17, 24, 39, 0.8), rgba(9, 13, 22, 0.9));
@@ -108,6 +119,10 @@ font-weight: 1000;
 }
 
 .stats-card h3 {
+<<<<<<< HEAD
+=======
+  margin-bottom: 10px;
+>>>>>>> 0d5ffa6 (Improve responsive member dashboard styling)
   margin: 0 0 16px;
   color: var(--muted);
   font-size: 0.95rem;
@@ -119,7 +134,11 @@ font-weight: 1000;
 .stats-card p {
   margin: 0;
   color: #ffffff;
+<<<<<<< HEAD
   font-size: clamp(2rem, 3vw, 2.8rem);
+=======
+  font-size: clamp(1.7rem, 3vw, 2.3rem);
+>>>>>>> 0d5ffa6 (Improve responsive member dashboard styling)
   font-weight: 700;
   line-height: 1.2;
   white-space: nowrap;
@@ -409,11 +428,22 @@ font-weight: 1000;
   cursor: pointer;
   z-index: 2;
 }
+<<<<<<< HEAD
+=======
 
-.close-btn:hover {
-  background: rgba(255, 255, 255, 0.14);
-}
+@media (max-width: 600px) {
+.filter-box select {
+    font-size: 13px;
+    padding: 8px 30px 8px 10px;
+  }
+>>>>>>> 0d5ffa6 (Improve responsive member dashboard styling)
 
+  .filter-box select option {
+    font-size: 13px;
+    padding: 6px;
+  }
+
+<<<<<<< HEAD
 .no-members {
   grid-column: 1 / -1;
   min-height: 180px;
@@ -522,14 +552,52 @@ font-weight: 1000;
   }
 
   .members-container {
+=======
+  .toolbar {
+    width: calc(100% - 20px);
+    margin: 0 auto 16px;
+    padding: 10px;
+    gap: 10px;
+  }
+
+  .search-box,
+  .filter-box,
+  .add-member-btn {
+    width: 100%;
+    min-width: 0;
+    min-height: 48px;
+    margin: 0;
+    border-radius: 10px;
+  }
+
+  .search-box input,
+  .filter-box select {
+    width: 100%;
+    height: 46px;
+    margin: 0;
+    padding: 10px 12px;
+    font-size: 15px;
+  }
+
+  .filter-box select {
+    padding-right: 36px;
+  }
+
+  .add-member-btn {
+    flex: none;
+>>>>>>> 0d5ffa6 (Improve responsive member dashboard styling)
     padding: 12px;
+    font-size: 15px;
   }
 
-  .members-container h1 {
-    font-size: 20px;
-    margin: 8px 0 12px;
+  .members-container > h1 {
+    font-size: 1.25rem;
+    letter-spacing: 1px;
+    padding-bottom: 8px;
   }
+}
 
+<<<<<<< HEAD
   .delete-icon {
     width: 44px;
     height: 24px;
@@ -593,84 +661,76 @@ font-weight: 1000;
   }
 
   .member-card input[type="date"] {
+=======
+.filter-box {
+>>>>>>> 0d5ffa6 (Improve responsive member dashboard styling)
     width: 100%;
-    box-sizing: border-box;
-    padding: 8px;
-    margin: 8px 0;
-    font-size: 14px;
-  }
+    min-width: 0;
+    max-width: none;
+    flex: 1 1 100%;
+  height: 52px;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+}
 
-  .stats-card {
-    padding: 12px;
-    min-height: auto;
-  }
+.filter-box select {
+  
+  height: 100%;
+  min-width: 0;
+  padding: 12px 34px 12px 12px;
+  color: #fff;
+  appearance: none;
+  background-color: transparent;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width=' twaalf' height='12' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='3'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 10px center;
+  background-size: 14px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
 
-  .stats-card {
-    display: inline-flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    vertical-align: top;
-    width: calc(50% - 10px);
-    min-height: 100px;
-    margin: 0 3px 10px;
-    padding: 10px 5px;
-  }
+.filter-box select,
+.filter-box select option {
+  background-color: #0A0D0E;
+  color: #ffffff;
+}
 
-  .stats-card h3 {
-    margin: 0 0 6px;
-    font-size: 0.68rem;
-    line-height: 1.2;
-    letter-spacing: 0.4px;
-    overflow-wrap: anywhere;
-  }
+.filter-box select option:checked,
+.filter-box select option:hover {
+  background-color: #1a1a1a;
+  color: #ffffff;
+}
 
-  .stats-card p {
-    margin: 0;
-    font-size: 1.1rem;
-    line-height: 1.2;
-    overflow-wrap: anywhere;
-  }
 
-  .dashboard {
-    padding: 20px 8px;
-  }
 
-  .dashboard .stats-card {
-    display: inline-flex;
-    width: calc(50% - 12px);
-    min-height: 105px;
-    margin: 0 4px 10px;
-    padding: 12px 6px;
-    vertical-align: top;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-  }
+.search-box {
+  box-shadow: none;
+}
 
-  .dashboard .stats-card h3 {
-    margin: 0 0 8px;
-    font-size: 0.72rem;
-    line-height: 1.2;
-    overflow-wrap: anywhere;
-  }
+.member-details {
+  margin: 18px 0 22px;
+  padding: 14px 0;
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+}
 
-  .dashboard .stats-card p {
-    margin: 0;
-    font-size: 1.15rem;
-    line-height: 1.2;
-    overflow-wrap: anywhere;
-  }
+.member-details p {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  margin: 12px 0;
+  color: var(--muted);
+}
 
-  .member-card .delete-button {
-    width: 100%;
-    margin: 10px 0 0;
-    padding: 12px 14px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
+.member-details span {
+  font-size: 0.9rem;
+}
 
+<<<<<<< HEAD
   .member-card .delete-icon {
     width: 15px;
     height: 15px;
@@ -740,6 +800,8 @@ font-weight: 1000;
   font-size: 0.9rem;
 }
 
+=======
+>>>>>>> 0d5ffa6 (Improve responsive member dashboard styling)
 .member-details strong {
   color: #fff;
   text-align: right;
@@ -790,4 +852,8 @@ font-weight: 1000;
 .member-status.active span,
 .member-status.active strong {
   color: #2AA076 !important;
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> 0d5ffa6 (Improve responsive member dashboard styling)
