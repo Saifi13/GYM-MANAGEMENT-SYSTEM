@@ -4,7 +4,7 @@ function DashBoard (){
 
 
     return <div className="dashboard">
-        <h1>Iron Gym Manager</h1>
+        <h1>IRON GYM MANAGER</h1>
         <h2>Dashboard</h2>
 
     </div>
