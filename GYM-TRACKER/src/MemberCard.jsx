@@ -100,58 +100,68 @@ function formatDate(date) {
 
 
 
-   return <div className = "member-card">
+   return (
+    <div className="member-card">
+      <h3>{props.name}</h3>
 
-    <h3>{props.name}</h3>
+      <div className="member-details">
+        <p>
+          <span>Membership</span>
+          <strong>{props.membership}</strong>
+        </p>
 
-<p>{props.membership}</p>
+        <p>
+          <span>Joining Date</span>
+          <strong>{formatDate(props.joining)}</strong>
+        </p>
 
-<p>{formatDate(props.joining)}</p>
+        <p>
+          <span>Yearly</span>
+          <strong>{formatDate(props.end_date)}</strong>
+        </p>
 
-<p>{formatDate(props.end_date)}</p>
+        <p className={`member-status ${getStatus(props.end_date).toLowerCase()}`}>
+          <span>Status</span>
+          <strong>{getStatus(props.end_date)}</strong>
+        </p>
+      </div>
 
- <p>Status: {getStatus(props.end_date)}</p>
-
-
-
- {clicked ? (
-
-        <>
-
+      {clicked ? (
+        <div className="renew-section">
           <input
-
             type="date"
-
             value={new_endDate}
-
             onChange={(event) => setNew_endDate(event.target.value)}
-
           />
-
-
-
-          <button className="save-button" onClick={handleRenew}>Save Renewal</button>
-
-        </>
-
+          <button className="save-button" onClick={handleRenew}>
+            Save Renewal
+          </button>
+        </div>
       ) : (
+        <div className="member-actions">
+          <button
+            className="renew-button"
+            onClick={() => setIsClicked(true)}
+          >
+            Renew
+          </button>
 
-        <button className="renew-button" onClick={() => setIsClicked(true)}>Renew</button>
-
+          <button className="delete-button" onClick={handleDelete}>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 30 30"
+              className="delete-icon"
+            >
+              <path
+                fill="currentColor"
+                d="M13 3a1 1 0 0 0-1 1H6a1 1 0 1 0 0 2h18a1 1 0 1 0 0-2h-6a1 1 0 0 0-1-1h-4zM6 8v16c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V8H6z"
+              />
+            </svg>
+          </button>
+        </div>
       )}
-
-
-
-      <button className="delete-button" onClick={handleDelete}>
-        <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="30" height="30" viewBox="0 0 30 30" className="delete-icon">
-          <path fill="currentColor" d="M 13 3 A 1.0001 1.0001 0 0 0 11.986328 4 L 6 4 A 1.0001 1.0001 0 1 0 6 6 L 24 6 A 1.0001 1.0001 0 1 0 24 4 L 18.013672 4 A 1.0001 1.0001 0 0 0 17 3 L 13 3 z M 6 8 L 6 24 C 6 25.105 6.895 26 8 26 L 22 26 C 23.105 26 24 25.105 24 24 L 24 8 L 6 8 z"></path>
-        </svg>
-        
-      </button>
-
-
-
     </div>
+  );
 
 }
 
