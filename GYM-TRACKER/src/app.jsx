@@ -149,17 +149,7 @@ return (
           </select>
         </div>
 
-        <div className="filter-box">
-          <select
-            value={membershipFilter}
-            onChange={(event) => setMembershipFilter(event.target.value)}
-          >
-            <option value="">All Types</option>
-            <option value="Monthly">Monthly</option>
-            <option value="Quarterly">Quarterly</option>
-            <option value="Yearly">Yearly</option>
-          </select>
-        </div>
+       
 
         <button
           type="button"
@@ -171,7 +161,7 @@ return (
       </div>
 
       <div className="members-container">
-        <h1>recent members</h1>
+        <h1>RECENT MEMBERS</h1>
 
         {filteredMembers.length === 0 ? (
           <div className="no-members">
