@@ -6,11 +6,10 @@ import "./style.css";
 
 
 
-const API_URL =
-
-  "https://gym-management-system-production-2248.up.railway.app";
-
-
+const API_URL = (
+  import.meta.env.VITE_API_URL ||
+  "https://gym-management-system-1-zx6d.onrender.com"
+).replace(/\/$/, "");
 
 function MemberCard(props){
 

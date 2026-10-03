@@ -7,217 +7,209 @@ import React from "react";
 
 function App() {
 
+  const API_URL = (
+    import.meta.env.VITE_API_URL ||
+    "https://gym-management-system-1-zx6d.onrender.com"
+  ).replace(/\/$/, "");
 
-
-
-const [members, setMembers] = useState([]);
-const [search, setSearch] = useState("");
-const [filter, setFilter] = useState("");
-const [membershipFilter, setMembershipFilter] = useState("");
-const [showAddMember, setShowAddMember] = useState(false);
-const [visibleCount, setVisibleCount] = useState(12);
+  const [members, setMembers] = useState([]);
+  const [search, setSearch] = useState("");
+  const [filter, setFilter] = useState("");
+  const [membershipFilter, setMembershipFilter] = useState("");
+  const [showAddMember, setShowAddMember] = useState(false);
+  const [visibleCount, setVisibleCount] = useState(12);
 
   const todayy = new Date().toISOString().split("T")[0];
 
-const isMembersActive = (member) => {
-  const endDate = member.end_date?.split("T")[0];
-  return endDate >= todayy;
-}
+  const isMembersActive = (member) => {
+    const endDate = member.end_date?.split("T")[0];
+    return endDate >= todayy;
+  };
 
-const filteredMembers = members.filter((member) => {
-  const matchSearch =
-    !search ||
-    member.name?.toLowerCase().includes(search.toLowerCase());
+  const filteredMembers = members.filter((member) => {
+    const matchSearch =
+      !search ||
+      member.name?.toLowerCase().includes(search.toLowerCase());
 
-  const statusValue = isMembersActive(member) ? "activate" : "deactivate";
-  const matchFilter = !filter || statusValue === filter;
+    const statusValue = isMembersActive(member) ? "activate" : "deactivate";
+    const matchFilter = !filter || statusValue === filter;
 
-  const matchMembership = !membershipFilter || member.membership === membershipFilter;
+    const matchMembership = !membershipFilter || member.membership === membershipFilter;
 
-  return matchSearch && matchFilter && matchMembership;
-});
+    return matchSearch && matchFilter && matchMembership;
+  });
 
-useEffect(() => {
-  async function loadMembers() {
-    try {
-      const API_URL =
-        import.meta.env.VITE_API_URL ||
-        "https://gym-management-system-production-2248.up.railway.app";
+  useEffect(() => {
+    async function loadMembers() {
+      try {
+        const response = await fetch(`${API_URL}/members`);
+        const data = await response.json();
 
-      const response = await fetch(`${API_URL}/members`);
-      const data = await response.json();
+        if (!response.ok) {
+          throw new Error(data.error || "Failed to load members");
+        }
 
-      if (!response.ok) {
-        throw new Error(data.error || "Failed to load members");
+        setMembers(Array.isArray(data) ? data : []);
+      } catch (error) {
+        console.error("Failed to load members:", error);
+        setMembers([]);
       }
-
-      setMembers(Array.isArray(data) ? data : []);
-    } catch (error) {
-      console.error("Failed to load members:", error);
-      setMembers([]);
     }
+
+    loadMembers();
+  }, []);
+
+  function handleMemberAdded(newMember) {
+    setMembers((currentMember) => [newMember, ...currentMember]);
+    setShowAddMember(false);
   }
 
-  loadMembers();
-}, []);
+  function deleteMember(id) {
+    fetch(`${API_URL}/members/${id}`, { method: "DELETE" })
+      .then(() => {
+        setMembers((currentMembers) =>
+          currentMembers.filter((member) => member.id !== id)
+        );
+      })
+      .catch((error) => console.error("Delete failed:", error));
+  }
 
-function handleMemberAdded(newMember) {
-  setMembers((currentMember) => [newMember, ...currentMember]);
-  setShowAddMember(false);
-}
-
-function deleteMember(id) {
-  fetch(`https://gym-management-system-production-2248.up.railway.app/members/${id}`, {
-    method: "DELETE",
-  })
-    .then(() => {
-      setMembers((currentMember) =>
-        currentMember.filter((member) => member.id !== id)
-      );
+  function RenewMember(id, newEndDate) {
+    fetch(`${API_URL}/members/${id}`, {
+      method: "PUT",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ end_date: newEndDate }),
     })
-    .catch((error) => console.error("Delete failed:", error));
-}
+      .then(() => {
+        setMembers((currentMembers) =>
+          currentMembers.map((member) =>
+            member.id === id ? { ...member, end_date: newEndDate } : member
+          )
+        );
+      })
+      .catch((error) => console.error("Renew failed:", error));
+  }
 
-function RenewMember(id, newEndDate) {
-  fetch(`https://gym-management-system-production-2248.up.railway.app/members/${id}`, {
-    method: "PUT",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({ end_date: newEndDate }),
-  })
-    .then(() => {
-      setMembers((currentMembers) =>
-        currentMembers.map((member) =>
-          member.id === id ? { ...member, end_date: newEndDate } : member
-        )
-      );
-    })
-    .catch((error) => console.error("Renew failed:", error));
-}
+  const today = new Date().toISOString().split("T")[0];
 
-const today = new Date().toISOString().split("T")[0];
+  const totalMembers = members.length;
 
-const totalMembers = members.length;
+  const activeMembers = members.filter((member) => {
+    const endDate = member.end_date?.split("T")[0];
+    return endDate >= today;
+  }).length;
 
-const activeMembers = members.filter((member) => {
-  const endDate = member.end_date?.split("T")[0];
-  return endDate >= today;
-}).length;
+  const expiredMembers = totalMembers - activeMembers;
 
-const expiredMembers = totalMembers - activeMembers;
+  const totalCollection = members.reduce(
+    (total, member) => total + Number(member.price || 0),
+    0
+  );
 
-const totalCollection = members.reduce(
-  (total, member) => total + Number(member.price || 0),
-  0
-);
+  const liveStats = [
+    { title: "Total Members", value: totalMembers },
+    { title: "Active Members", value: activeMembers },
+    { title: "Expired Members", value: expiredMembers },
+    { title: "Total Collection", value: `₹${totalCollection.toLocaleString("en-IN")}` },
+  ];
 
-const liveStats = [
-  { title: "Total Members", value: totalMembers },
-  { title: "Active Members", value: activeMembers },
-  { title: "Expired Members", value: expiredMembers },
-  { title: "Total Collection", value: `₹${totalCollection.toLocaleString("en-IN")}` },
-];
+  return (
+    <>
+      <DashBoard />
 
-return (
-  <>
-    <DashBoard />
+      {liveStats.map((stat, index) => (
+        <StatsCard key={index} title={stat.title} value={stat.value} />
+      ))}
 
-    {liveStats.map((stat, index) => (
-      <StatsCard key={index} title={stat.title} value={stat.value} />
-    ))}
-
-    <div className="content-area">
-      <div className="toolbar">
-        <div className="search-box">
-          <input
-            value={search}
-            onChange={(event) => setSearch(event.target.value)}
-            type="text"
-            placeholder="Search members..."
-          />
-        </div>
-
-        <div className="filter-box">
-          <select
-            value={filter}
-            onChange={(event) => setFilter(event.target.value)}
-          >
-            <option value="">All Members</option>
-            <option value="activate">Active</option>
-            <option value="deactivate">Expired</option>
-          </select>
-        </div>
-
-       
-
-        <button
-          type="button"
-          className="add-member-btn"
-          onClick={() => setShowAddMember(true)}
-        >
-          + Add Member
-        </button>
-      </div>
-
-      <div className="members-container">
-        <h1>RECENT MEMBERS</h1>
-
-        {filteredMembers.length === 0 ? (
-          <div className="no-members">
-            <p>No members found</p>
+      <div className="content-area">
+        <div className="toolbar">
+          <div className="search-box">
+            <input
+              value={search}
+              onChange={(event) => setSearch(event.target.value)}
+              type="text"
+              placeholder="Search members..."
+            />
           </div>
-        ) : (
-          <>
-            {filteredMembers.slice(0, visibleCount).map((member) => (
-              <MemberCard
-                key={member.id}
-                {...member}
-                onDelete={deleteMember}
-                onRenew={RenewMember}
-              />
-            ))}
 
-            {filteredMembers.length > 12 && (
-              <div className="pagination-buttons">
-                {visibleCount < filteredMembers.length ? (
-                  <button
-                    className="show-more-btn"
-                    onClick={() => setVisibleCount(prev => prev + 12)}
-                  >
-                    Show More ({filteredMembers.length - visibleCount} remaining)
-                  </button>
-                ) : (
-                  <button
-                    className="show-less-btn"
-                    onClick={() => setVisibleCount(12)}
-                  >
-                    Show Less
-                  </button>
-                )}
-              </div>
-            )}
-          </>
-        )}
-      </div>
-    </div>
+          <div className="filter-box">
+            <select
+              value={filter}
+              onChange={(event) => setFilter(event.target.value)}
+            >
+              <option value="">All Members</option>
+              <option value="activate">Active</option>
+              <option value="deactivate">Expired</option>
+            </select>
+          </div>
 
-    {showAddMember && (
-      <div className="modal-backdrop" onClick={() => setShowAddMember(false)}>
-        <div className="modal-card" onClick={(event) => event.stopPropagation()}>
           <button
             type="button"
-            className="close-btn"
-            onClick={() => setShowAddMember(false)}
+            className="add-member-btn"
+            onClick={() => setShowAddMember(true)}
           >
-            ×
+            + Add Member
           </button>
+        </div>
 
-          <AddMember onMemberAdded={handleMemberAdded} />
+        <div className="members-container">
+          <h1>RECENT MEMBERS</h1>
+
+          {filteredMembers.length === 0 ? (
+            <div className="no-members">
+              <p>No members found</p>
+            </div>
+          ) : (
+            <>
+              {filteredMembers.slice(0, visibleCount).map((member) => (
+                <MemberCard
+                  key={member.id}
+                  {...member}
+                  onDelete={deleteMember}
+                  onRenew={RenewMember}
+                />
+              ))}
+
+              {filteredMembers.length > 12 && (
+                <div className="pagination-buttons">
+                  {visibleCount < filteredMembers.length ? (
+                    <button
+                      className="show-more-btn"
+                      onClick={() => setVisibleCount(prev => prev + 12)}
+                    >
+                      Show More ({filteredMembers.length - visibleCount} remaining)
+                    </button>
+                  ) : (
+                    <button
+                      className="show-less-btn"
+                      onClick={() => setVisibleCount(12)}
+                    >
+                      Show Less
+                    </button>
+                  )}
+                </div>
+              )}
+            </>
+          )}
         </div>
       </div>
-    )}
-  </>
+
+      {showAddMember && (
+        <div className="modal-backdrop" onClick={() => setShowAddMember(false)}>
+          <div className="modal-card" onClick={(event) => event.stopPropagation()}>
+            <button
+              type="button"
+              className="close-btn"
+              onClick={() => setShowAddMember(false)}
+            >
+              ×
+            </button>
+
+            <AddMember onMemberAdded={handleMemberAdded} />
+          </div>
+        </div>
+      )}
+    </>
 );
 }
 

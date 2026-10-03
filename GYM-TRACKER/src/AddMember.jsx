@@ -26,24 +26,28 @@ setFormData({
 
 async function handleClick(event){
 event.preventDefault();
-console.log(formData)
 
- const response = await fetch("https://gym-management-system-production-2248.up.railway.app/members", {
-      method: 'POST',
-      headers: {
-          "Content-Type": "application/json",
+const API_URL = (
+  import.meta.env.VITE_API_URL ||
+  "https://gym-management-system-1-zx6d.onrender.com"
+).replace(/\/$/, "");
 
-          'Accept': 'application/json'
-      },
-      body: JSON.stringify(formData) // Converts JavaScript object to JSON string
+const response = await fetch(`${API_URL}/members`, {
+  method: "POST",
+  headers: {
+    "Content-Type": "application/json",
+    Accept: "application/json",
+  },
+  body: JSON.stringify(formData),
+});
 
-    });
-    if (!response.ok) {
+if (!response.ok) {
   throw new Error("Failed to add member");
 }
 
 const newMember = await response.json();
 props.onMemberAdded(newMember);
+
 
 
 }
