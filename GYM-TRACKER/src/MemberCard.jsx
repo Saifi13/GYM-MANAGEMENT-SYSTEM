@@ -9,7 +9,7 @@ import "./style.css";
 const API_URL = (
   import.meta.env.VITE_API_URL ||
   "https://gym-management-system-1-zx6d.onrender.com"
-).replace(/\/$/, "");
+).replace(/\/+$/, "");
 
 function MemberCard(props){
 
