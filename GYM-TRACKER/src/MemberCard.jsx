@@ -1,73 +1,42 @@
 import React, { useState } from "react";
-
 import "./style.css";
 
+function MemberCard(props) {
+  const [clicked, setIsClicked] = useState(false);
+  const [new_endDate, setNew_endDate] = useState("");
 
-
-
-
-const API_URL = (
-  import.meta.env.VITE_API_URL ||
-  "https://gym-management-system-1-zx6d.onrender.com"
-).replace(/\/+$/, "");
-
-function MemberCard(props){
-
-
-
-    const [clicked , setIsClicked] = useState(false)
-
- const[new_endDate , setNew_endDate] = useState("")
-
-
-
-
-
-async function handleDelete() {
-
-  try {
-    await props.onDelete(props.id);
-  } catch (error) {
-    console.error("Delete failed:", error);
+  async function handleDelete() {
+    try {
+      await props.onDelete(props.id);
+    } catch (error) {
+      console.error("Delete failed:", error);
+    }
   }
 
+  async function handleRenew() {
+    if (!new_endDate) return;
 
-
-async function handleRenew() {
-
-  if (!new_endDate) return;
-
-  try {
-    await props.onRenew(props.id, new_endDate);
-    setIsClicked(false);
-    setNew_endDate("");
-  } catch (error) {
-    console.error("Renewal failed:", error);
+    try {
+      await props.onRenew(props.id, new_endDate);
+      setIsClicked(false);
+      setNew_endDate("");
+    } catch (error) {
+      console.error("Renewal failed:", error);
+    }
   }
 
-
+  function formatDate(date) {
+    return date ? date.split("T")[0] : "";
+  }
 
   function getStatus(end_date) {
-
     const today = new Date().toISOString().split("T")[0];
+    const formattedEndDate = formatDate(end_date);
 
-    return formatDate(end_date) >= today ? "Active" : "Deactive";
-
+    return formattedEndDate && formattedEndDate >= today ? "Active" : "Deactive";
   }
 
-
-
-
-
-function formatDate(date) {
-
-    return date ? date.split("T")[0] : "";
-
-}
-
-
-
-   return (
+  return (
     <div className="member-card">
       <h3>{props.name}</h3>
 
@@ -129,9 +98,6 @@ function formatDate(date) {
       )}
     </div>
   );
-
 }
-
-
 
 export default MemberCard;
