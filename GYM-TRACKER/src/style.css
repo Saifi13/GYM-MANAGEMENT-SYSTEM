@@ -87,30 +87,11 @@ font-weight: 1000;
 }
 
 .stats-card {
-<<<<<<< HEAD
-<<<<<<< HEAD
   display: inline-block;
   width: 21%;
   min-height: 140px;
   margin: 0 1.5% 16px;
   padding: 24px 20px 20px;
-=======
-  display: inline-flex;
-  vertical-align: top;
-  flex-direction: column;
-  justify-content: center;
-  width: calc(50% - 3.2%);
-  min-height: 115px;
-  margin: 0 1.5% 16px;
-  padding: 18px 14px;
->>>>>>> 0d5ffa6 (Improve responsive member dashboard styling)
-=======
-  display: inline-block;
-  width: 21%;
-  min-height: 140px;
-  margin: 0 1.5% 16px;
-  padding: 24px 20px 20px;
->>>>>>> e2447bc (Improve responsive member dashboard styling)
   text-align: center;
   background:
     linear-gradient(180deg, rgba(17, 24, 39, 0.8), rgba(9, 13, 22, 0.9));
@@ -127,13 +108,6 @@ font-weight: 1000;
 }
 
 .stats-card h3 {
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-  margin-bottom: 10px;
->>>>>>> 0d5ffa6 (Improve responsive member dashboard styling)
-=======
->>>>>>> e2447bc (Improve responsive member dashboard styling)
   margin: 0 0 16px;
   color: var(--muted);
   font-size: 0.95rem;
@@ -145,15 +119,7 @@ font-weight: 1000;
 .stats-card p {
   margin: 0;
   color: #ffffff;
-<<<<<<< HEAD
-<<<<<<< HEAD
   font-size: clamp(2rem, 3vw, 2.8rem);
-=======
-  font-size: clamp(1.7rem, 3vw, 2.3rem);
->>>>>>> 0d5ffa6 (Improve responsive member dashboard styling)
-=======
-  font-size: clamp(2rem, 3vw, 2.8rem);
->>>>>>> e2447bc (Improve responsive member dashboard styling)
   font-weight: 700;
   line-height: 1.2;
   white-space: nowrap;
@@ -443,85 +409,11 @@ font-weight: 1000;
   cursor: pointer;
   z-index: 2;
 }
-<<<<<<< HEAD
-=======
 
-<<<<<<< HEAD
-@media (max-width: 600px) {
-.filter-box select {
-    font-size: 13px;
-    padding: 8px 30px 8px 10px;
-  }
->>>>>>> 0d5ffa6 (Improve responsive member dashboard styling)
-=======
 .close-btn:hover {
   background: rgba(255, 255, 255, 0.14);
 }
->>>>>>> e2447bc (Improve responsive member dashboard styling)
 
-.no-members {
-  grid-column: 1 / -1;
-  min-height: 180px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: rgba(17, 24, 39, 0.7);
-  border: 1px dashed rgba(148, 163, 184, 0.32);
-  border-radius: 16px;
-  color: var(--muted);
-  text-align: center;
-}
-
-.no-members p {
-  margin: 0;
-  font-size: 1.08rem;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: var(--muted);
-}
-
-.pagination-buttons {
-  grid-column: 1 / -1;
-  display: flex;
-  justify-content: center;
-  margin-top: 32px;
-  padding: 20px;
-}
-
-.show-more-btn,
-.show-less-btn {
-  padding: 14px 32px;
-  background: linear-gradient(135deg, var(--primary), var(--primary-dark));
-  color: #0A0E0F;
-  border: none;
-  border-radius: 12px;
-  font-weight: 700;
-  font-size: 1rem;
-  cursor: pointer;
-  transition: transform 0.2s ease, filter 0.2s ease;
-  box-shadow: 0 8px 20px rgba(163, 230, 53, 0.3);
-}
-
-.show-more-btn:hover,
-.show-less-btn:hover {
-  transform: translateY(-2px);
-  filter: brightness(1.08);
-}
-
-.show-less-btn {
-  background: linear-gradient(135deg, #2d2d2d, #1a1a1a);
-  color: #ffffff;
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
-}
-
-
-@media (max-width: 768px) {
-  .filter-box {
-    width: 100%;
-    margin: 0;
-  }
-
-<<<<<<< HEAD
 .no-members {
   grid-column: 1 / -1;
   min-height: 180px;
@@ -630,63 +522,6 @@ font-weight: 1000;
   }
 
   .members-container {
-=======
-  .toolbar {
-    gap: 6px;
-  }
-}
-
-@media (max-width: 600px) {
-  .content-area {
-    padding: 12px;
-  }
-
-  .toolbar {
-    display: flex;
-    flex-direction: column;
-    align-items: stretch;
-    width: calc(100% - 20px);
-    gap: 10px;
-  }
-
-  .search-box,
-  .filter-box,
-  .add-member-btn {
-    width: 100% !important;
-    max-width: none !important;
-    min-width: 0 !important;
-    flex: 0 0 48px !important;
-    height: 48px;
-    min-height: 48px;
-    margin: 0 !important;
-  }
-
-  .filter-box select {
-    font-size: 12px;
-    padding: 6px 28px 6px 9px;
-  }
-
-  .filter-box select option {
-    font-size: 12px;
-    padding: 4px;
-  }
-  .search-box input
-   {
-    width: 100%;
-    height: 46px;
-  }
-
-<<<<<<< HEAD
-  .filter-box select {
-    padding-right: 36px;
-  }
-
-  .add-member-btn {
-    flex: none;
->>>>>>> 0d5ffa6 (Improve responsive member dashboard styling)
-=======
-  .members-container {
->>>>>>> e2447bc (Improve responsive member dashboard styling)
     padding: 12px;
   }
 
@@ -842,151 +677,6 @@ font-weight: 1000;
   }
 }
 
-<<<<<<< HEAD
-  .delete-icon {
-    width: 44px;
-    height: 24px;
-  }
-
-  .member-card {
-    padding: 12px;
-    margin-bottom: 10px;
-    font-size: 14px;
-  }
-
-  .member-card h3 {
-    font-size: 17px;
-    margin: 0 0 6px;
-  }
-
-  .member-card p {
-    margin: 5px 0;
-    white-space: nowrap;
-  }
-
-  .member-status {
-    color: #2AA076 !important;
-    font-weight: 700;
-  }
-
-  .member-actions {
-    display: flex;
-    gap: 10px;
-    align-items: center;
-    margin-top: 14px;
-  }
-
-  .member-actions button {
-    margin-top: 0;
-  }
-
-  .member-actions .renew-button {
-    flex: 1;
-  }
-
-  .member-actions .delete-button {
-    flex: 0 0 54px;
-    width: 54px;
-    padding: 12px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-
-  .member-actions .delete-icon {
-    width: 20px;
-    height: 20px;
-  }
-
-  .renew-button,
-  .save-button,
-  .delete-button {
-    padding: 8px 10px;
-    font-size: 13px;
-  }
-
-  .member-card input[type="date"] {
-=======
-.filter-box {
-<<<<<<< HEAD
->>>>>>> 0d5ffa6 (Improve responsive member dashboard styling)
-    width: 100%;
-    min-width: 0;
-    max-width: none;
-    flex: 1 1 100%;
-  height: 52px;
-  margin: 0;
-=======
-  flex: 0 1 220px;
-  min-width: 0;
->>>>>>> e2447bc (Improve responsive member dashboard styling)
-  display: flex;
-  align-items: center;
-  margin-right: 0;
-  overflow: hidden;
-}
-
-.filter-box select {
-  width: 100%;
-  min-width: 0;
-  padding: 12px 34px 12px 12px;
-  color: #fff;
-  appearance: none;
-  background-color: transparent;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width=' twaalf' height='12' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='3'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");
-  background-repeat: no-repeat;
-  background-position: right 10px center;
-  background-size: 14px;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-
-.filter-box select,
-.filter-box select option {
-  background-color: #0A0D0E;
-  color: #ffffff;
-}
-
-.filter-box select option:checked,
-.filter-box select option:hover {
-  background-color: #1a1a1a;
-  color: #ffffff;
-}
-
-
-
-.search-box {
-  box-shadow: none;
-}
-
-.member-details {
-  margin: 18px 0 22px;
-  padding: 14px 0;
-  border-top: 1px solid var(--line);
-  border-bottom: 1px solid var(--line);
-}
-
-.member-details p {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 16px;
-  margin: 12px 0;
-  color: var(--muted);
-}
-
-.member-details span {
-  font-size: 0.9rem;
-}
-
-<<<<<<< HEAD
-  .member-card .delete-icon {
-    width: 15px;
-    height: 15px;
-  }
-}
-
 .filter-box {
   flex: 0 1 220px;
   min-width: 0;
@@ -1050,8 +740,6 @@ font-weight: 1000;
   font-size: 0.9rem;
 }
 
-=======
->>>>>>> 0d5ffa6 (Improve responsive member dashboard styling)
 .member-details strong {
   color: #fff;
   text-align: right;
@@ -1102,8 +790,4 @@ font-weight: 1000;
 .member-status.active span,
 .member-status.active strong {
   color: #2AA076 !important;
-<<<<<<< HEAD
 }
-=======
-}
->>>>>>> 0d5ffa6 (Improve responsive member dashboard styling)
