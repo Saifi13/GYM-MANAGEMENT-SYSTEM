@@ -30,7 +30,7 @@ event.preventDefault();
 const API_URL = (
   import.meta.env.VITE_API_URL ||
   "https://gym-management-system-1-zx6d.onrender.com"
-).replace(/\/$/, "");
+).replace(/\/+$/, "");
 
 const response = await fetch(`${API_URL}/members`, {
   method: "POST",

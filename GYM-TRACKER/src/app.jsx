@@ -65,30 +65,28 @@ function App() {
     setShowAddMember(false);
   }
 
-  function deleteMember(id) {
-    fetch(`${API_URL}/members/${id}`, { method: "DELETE" })
-      .then(() => {
-        setMembers((currentMembers) =>
-          currentMembers.filter((member) => member.id !== id)
-        );
-      })
-      .catch((error) => console.error("Delete failed:", error));
+  async function deleteMember(id) {
+    const response = await fetch(`${API_URL}/members/${id}`, {
+      method: "DELETE",
+    });
+    if (!response.ok) throw new Error(`Delete failed: ${response.status}`);
+
+    setMembers((current) => current.filter((member) => member.id !== id));
   }
 
-  function RenewMember(id, newEndDate) {
-    fetch(`${API_URL}/members/${id}`, {
+  async function RenewMember(id, newEndDate) {
+    const response = await fetch(`${API_URL}/members/${id}`, {
       method: "PUT",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ end_date: newEndDate }),
-    })
-      .then(() => {
-        setMembers((currentMembers) =>
-          currentMembers.map((member) =>
-            member.id === id ? { ...member, end_date: newEndDate } : member
-          )
-        );
-      })
-      .catch((error) => console.error("Renew failed:", error));
+    });
+    if (!response.ok) throw new Error(`Renewal failed: ${response.status}`);
+
+    setMembers((current) =>
+      current.map((member) =>
+        member.id === id ? { ...member, end_date: newEndDate } : member
+      )
+    );
   }
 
   const today = new Date().toISOString().split("T")[0];

@@ -25,17 +25,11 @@ function MemberCard(props){
 
 async function handleDelete() {
 
-  await fetch(`${API_URL}/members/${props.id}`, {
-
-    method: "DELETE",
-
-  });
-
-
-
-  props.onDelete(props.id);
-
-}
+  try {
+    await props.onDelete(props.id);
+  } catch (error) {
+    console.error("Delete failed:", error);
+  }
 
 
 
@@ -43,39 +37,13 @@ async function handleRenew() {
 
   if (!new_endDate) return;
 
-
-
-  const response = await fetch(`${API_URL}/members/${props.id}`, {
-
-    method: "PUT",
-
-    headers: {
-
-      "Content-Type": "application/json",
-
-    },
-
-    body: JSON.stringify({ end_date: new_endDate }),
-
-  });
-
-
-
-  if (!response.ok) {
-
-    throw new Error(`Renewal failed: ${response.status}`);
-
+  try {
+    await props.onRenew(props.id, new_endDate);
+    setIsClicked(false);
+    setNew_endDate("");
+  } catch (error) {
+    console.error("Renewal failed:", error);
   }
-
-
-
-  props.onRenew(props.id, new_endDate);
-
-  setIsClicked(false);
-
-  setNew_endDate("");
-
-}
 
 
 
