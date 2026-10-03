@@ -10,7 +10,7 @@ function App() {
   const API_URL = (
     import.meta.env.VITE_API_URL ||
     "https://gym-management-system-1-zx6d.onrender.com"
-  ).replace(/\/$/, "");
+  ).replace(/\/+$/, "");
 
   const [members, setMembers] = useState([]);
   const [search, setSearch] = useState("");
@@ -43,11 +43,12 @@ function App() {
     async function loadMembers() {
       try {
         const response = await fetch(`${API_URL}/members`);
-        const data = await response.json();
 
         if (!response.ok) {
-          throw new Error(data.error || "Failed to load members");
+          throw new Error(`Failed to load members: ${response.status} ${response.url}`);
         }
+
+        const data = await response.json();
 
         setMembers(Array.isArray(data) ? data : []);
       } catch (error) {
